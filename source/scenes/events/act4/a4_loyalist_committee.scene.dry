@@ -1,0 +1,29 @@
+title: The Loyalist Committee
+subtitle: The Chancellor wants the Caucus close.
+tags: event
+view-if: war and war_begins_seen and pal_chancellor and not rc_chancellor and not loyalist_seen and not finale and not game_ending
+max-visits: 1
+new-page: true
+face-image: img/ev_chancellery.svg
+on-arrival: loyalist_seen = 1
+
+= The Loyalist Committee
+
+Chancellor Palpatine forms a **Loyalist Committee** of senators to advise him on the conduct of the war, and he wants Caucus senators on it. Bail Organa, Mon Mothma and Padmé Amidala are named in the invitation.
+
+A seat at that table means briefings, documents and the Chancellor's own words, which is the closest anyone has come to watching him work. It also means our names on every decision the Committee rubber-stamps.
+
+- @join: Accept the seats.
+- @refuse: Decline. The Caucus will not lend its name to the war cabinet.
+
+@join
+subtitle: Access to the Chancellery's papers every year, at the price of our reputation and the Pacifists' patience.
+on-arrival: loyalist_member = 1; evidence += 0.8; faith -= 1; pacifist_dissent += 5; pal_relation += 6
+
+The Caucus takes its seats. The briefings are long, polished and carefully incomplete, but now and then a document crosses the table that was never meant to.
+
+@refuse
+subtitle: The Senate notes our independence; the Hawks call it disloyal.
+on-arrival: pal_relation -= 8; senate_resolve += 0.5; hawk_dissent += 3
+
+The Caucus declines with thanks. The Chancellor accepts with regret. His allies call the Caucus "fair-weather patriots".

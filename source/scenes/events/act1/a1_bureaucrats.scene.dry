@@ -1,0 +1,39 @@
+title: Enter the Bureaucrats
+subtitle: Senator Palpatine offers some friendly advice.
+tags: event
+view-if: date >= 6 and date <= 20 and not finale
+max-visits: 1
+new-page: true
+face-image: img/ev_chancellery.svg
+
+= Enter the Bureaucrats
+
+After a long session, Senator Palpatine of Naboo stops by the Caucus's offices. He is sympathetic about the Chancellor's troubles, as he is about everyone's.
+
+"Valorum is a good man, but he is not the one who governs," he says, lowering his voice. "*Enter the bureaucrats: the true rulers of the Republic. And on the payroll of the Trade Federation, I might add.* Whoever governs must make peace with them, or be undone by them."
+
+He is not wrong. The Senate's permanent staff of clerks, committee secretaries and procedural officers decide which bills reach the floor and which vanish in committee. They are comfortable with governments of the establishment: the Core Moderates, the Commerce Guilds, the Security Bloc. They distrust reformers like us and the Rim's champions, and they turn on anyone who succeeds too well or squeezes the guilds who pay them.
+
+*From now on, **the Senate bureaucracy** appears in **Our relations** on the Senate tab. Whenever the Caucus governs or chairs a committee, the partners we govern with and the reforms we pass decide how the bureaucrats treat us. If they turn **cold**, our bills start getting lost in committee. If they turn **hostile**, they will move against us. Some advisors know how to work with them.*
+
+- @thank: Thank him for the advice.
+- @defend: Defend the civil service in public.
+- @ask: Ask him who exactly is paying them.
+
+@thank
+subtitle: Palpatine's bloc warms to us.
+on-arrival: pal_relation += 4
+
+"Any time," says Palpatine. "We must all look out for one another."
+
+@defend
+subtitle: The bureaucracy warms to us; the Rimward wing is unimpressed.
+on-arrival: bureau_relation += 8; rimward_dissent += 2
+
+The Caucus praises the Senate's "dedicated public servants". The committee secretaries notice. So do the Rimward senators, who have waited years for those servants to process a single Rim petition.
+
+@ask
+subtitle: A first thread to pull.
+on-arrival: evidence += 0.3; pal_relation -= 2
+
+Palpatine smiles, says something about the Trade Federation's lobbyists, and changes the subject. Someone in the Caucus makes a note to find out who signs the bureaucracy's pay vouchers.

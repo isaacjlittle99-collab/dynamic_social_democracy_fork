@@ -9,15 +9,18 @@ face-image: img/ev_senate.svg
 on-arrival: {!
 Q.restoration_seen = 1;
 Q.trial_held = Q.sidious_method === 'trial' || Q.sidious_method === 'civil_war' ? 1 : 0;
+// a public trial exposes the Sith Lord's payroll: his network of bought senators and officials is swept away
+if (Q.trial_held && !Q.trial_cleanup) { Q.trial_cleanup = 1; Q.corruption -= 12; Q.faith += 5; }
 var st = SW.stance(Q, {mod: 0.6, guild: 0.5, rim: 0.75, sec: 0.3, ind: 0.6, pal: 0.15, rfc: 0.75, cis: 0.6}, true);
-var adj = -(Q.fear - 30) / 200 - Math.max(0, Q.emergency_powers - 4) * 0.02 + (Q.delegation_formed ? 0.05 : 0);
+// with the Sith Lord exposed (and above all on trial), the Senate is readier to take its powers back
+var adj = -(Q.fear - 40) / 250 - Math.max(0, Q.emergency_powers - 4) * 0.02 + (Q.delegation_formed ? 0.05 : 0) + (Q.trial_held ? 0.08 : 0) + (Q.evidence_public >= 4 ? 0.05 : 0);
 for (var b in st) st[b] = SW.clamp(st[b] + adj, 0, 1);
 Q.rest_stance = st;
 !}
 
 = The Restoration Vote
 
-[? if trial_held : Darth Sidious, once [? if pal_was_chancellor : Supreme Chancellor ?][? if not pal_was_chancellor : Senator ?]Palpatine, will stand trial before the Supreme Court in full view of the galaxy. The evidence the Caucus gathered over fifteen years will be read into the record. ?][? if not trial_held : Darth Sidious is dead. The evidence of his crimes is being made public, piece by piece. ?]
+[? if trial_held : The trial's first weeks expose the Sith Lord's payroll: senators, committee clerks and guild officials he bought over a decade resign, flee or are indicted. ?] [? if trial_held : Darth Sidious, once [? if pal_was_chancellor : Supreme Chancellor ?][? if not pal_was_chancellor : Senator ?]Palpatine, will stand trial before the Supreme Court in full view of the galaxy. The evidence the Caucus gathered over fifteen years will be read into the record. ?][? if not trial_held : Darth Sidious is dead. The evidence of his crimes is being made public, piece by piece. ?]
 
 The Chancellor's office still holds [+ emergency_powers : powers +] emergency powers. [? if rc_chancellor : The Chancellor is now one of ours, [+ chancellor +], and the decision is ours too. ?][? if not rc_chancellor : The Caucus has tabled a **Restoration Act**: every emergency power to be repealed, the Senate's authority restored. ?]
 

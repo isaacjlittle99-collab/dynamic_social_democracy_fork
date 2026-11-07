@@ -5,8 +5,9 @@ go-to: root
 on-arrival: {!
 if (Q.turn_actions > 0) Q.turn_actions -= 1;
 var card = this.state.lastPlayedCard;
-if (card && this.state.currentHands && this.state.currentHands.main) {
-    this.state.currentHands.main.push({id: card.id, title: card.title, image: card.cardImage});
+var handId = Q.difficulty < 0 ? 'main_story' : 'main';
+if (card && this.state.currentHands && this.state.currentHands[handId]) {
+    this.state.currentHands[handId].push({id: card.id, title: card.title, image: card.cardImage});
     if (this.state.visits[card.id]) this.state.visits[card.id] -= 1;
 }
 if (Q.last_card_timer) {

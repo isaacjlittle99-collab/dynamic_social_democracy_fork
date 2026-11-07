@@ -17,6 +17,9 @@ is-special: true
 - @lib_leaders: Leaders and their views
 - @lib_meters: The state of the Republic, explained
 - @lib_systems: How the systems interact
+- @lib_bureaucrats: The bureaucrats
+- @lib_schemes: Sidious's schemes
+- @lib_endings: How the game ends
 - @lib_reforms: Safeguards and how to win them
 - @lib_charts: The Senate in charts
 - @lib_timeline: Timeline of the Republic to 33 BBY
@@ -89,7 +92,7 @@ go-to: menu
 
 **Hawks**: defenders of the Republic by force if need be. Distrustful of every Chancellor, they defect to the Security Bloc if the Caucus seems weak.
 
-Each faction has a **strength**, a **dissent** level and a **leader**. Overall dissent reduces almost every gain the Caucus makes. An advisor from a faction keeps its dissent in check. If a faction's dissent reaches about 60 (70 for the Institutionalists), it will break away: sooner under a firm leader, later under a pragmatist. Each leader has their own demands, shown in the Status panel when they are not met.
+Each faction has a **strength**, a **dissent** level and a **leader**. Overall dissent reduces almost every gain the Caucus makes. An advisor from a faction keeps its dissent in check. If a faction's dissent reaches about 60 (70 for the Institutionalists), it will break away: sooner under a firm leader, later under a pragmatist. A faction that breaks takes its senators with it. Under a firm leader it founds its own party; otherwise it joins the nearest bloc (Hawks the Security Bloc, Rimward the Rimward Coalition, Pacifists the Independents, Institutionalists the Core Moderates). Each leader has their own demands, shown in the Status panel when they are not met.
 
 @lib_leaders
 is-special: true
@@ -188,6 +191,69 @@ is-special: true
 - @lib_sys_war: The war, Anakin and the final reckoning
 - @library: Back to the Holocron's contents
 
+@lib_bureaucrats
+is-special: true
+new-page: true
+go-to: menu
+
+= The bureaucrats
+
+*"Enter the bureaucrats: the true rulers of the Republic. And on the payroll of the Trade Federation, I might add."* (Senator Palpatine)
+
+The Senate's permanent staff of clerks, committee secretaries and procedural officers decide which bills reach the floor and which vanish in committee. They appear in **Our relations** on the Senate tab, like a bloc.
+
+**What they like.** Governments of the establishment. When the Caucus joins or forms a government, the bureaucrats judge its partners at once: the Commerce Guilds, Palpatine's people and the Core Moderates reassure them; the Security Bloc and the Independents a little. The Caucus itself, the Rimward Coalition and breakaway reformers alarm them. The coalition choices tell you how they will react.
+
+**What turns them.** While the Caucus governs or chairs committees, they cool every turn that its partners worry them, and faster when the Caucus polls well, passes reforms, or squeezes the guilds who pay them. An Ethics Commission and good relations with the guilds help.
+
+**What they do.** When they turn **cold**, our reform bills lose support in committee. When they turn **hostile**, they prepare to move against us. If relations hit bottom, they strike: a "reorganisation" throws the Caucus out of government and strips its chairs, or, against a Caucus Chancellor, a manufactured crisis and a vote of no confidence, as they did to Valorum. Constructive no-confidence protects a Chancellor.
+
+**Winning them back.** Finis Valorum, Bail Organa and Bail Antilles can each work with the bureaucrats as advisors. The Judiciary & Intelligence Committee can reform the bureaucracy itself. A more establishment coalition, or easing off the guilds, reassures them.
+
+**The payroll.** Once our evidence is strong enough, the Shadow tab shows where the bureaucracy's payroll leads.
+
+@lib_schemes
+is-special: true
+new-page: true
+go-to: menu
+
+= Sidious's schemes
+
+A hidden hand answers the Caucus's successes. Every few turns, someone moves against us: an ally poisoned, a smear on the HoloNet, a bomb on the eve of peace talks, a bloc leader bought, records erased, the Jedi framed, the guilds turned against us, the bureaucrats given new orders, Separatist agitators paid, senators lured across the floor.
+
+**What draws its attention.** Whatever threatens it most. Strong evidence draws poisoners and archive thieves; a popular Caucus draws smears and defections; peace talks draw bombs; a suspicious Jedi Order draws forgeries. The more the Caucus achieves, the more often it happens.
+
+**Seeing it coming.** If the Jedi are suspicious (4 or more), our evidence is strong (5 or more), or we have run a Shadow Investigation in the last two turns, the scheme is **foreseen** a turn early, and we can counter it with political capital or an advisor's time. A foiled scheme leaves a little evidence behind.
+
+The Shadow tab lists the last three misfortunes.
+
+@lib_endings
+is-special: true
+new-page: true
+go-to: menu
+
+= How the game ends
+
+The game ends in 19 BBY, after the Last Days, unless it ends sooner.
+
+**Endings must be earned.** Surviving to the end is not enough. If Darth Sidious has not been unmasked and stopped, he proclaims the Empire, unless his powers have been stripped to 2 or fewer, the evidence against him is public, and term limits are entrenched, in which case the Republic endures with a shadow over it.
+
+**The best ending**, *The Republic Reborn*, needs all of these: Sidious defeated and tried (not killed), the Restoration Act passed, faith of 50 or more, corruption under control (below 65, or an Ethics Commission), and at least one lasting safeguard in place.
+
+**The arrest** needs preparation: see *How the systems interact*. A raid without a warrant, a loyal Senate Guard, Judicial Forces, conclusive evidence and a strong Jedi Order usually fails.
+
+**A war still raging at the end** decides the ending: if the front is well behind, the Confederacy wins; if neither side can win, the galaxy falls into **the Endless War**. Only Sidious's fall with the front holding lets the war wind down.
+
+**The game can be lost early:**
+
+• *The New Order, early.* If Palpatine is Chancellor with 8 emergency powers and the Senate's resolve is below 5, the next crisis lets him proclaim the Empire. A warning comes at 7 powers.
+
+• *The Senatorial Arrests.* If the Delegation of 2,000 defies a Chancellor who holds the Security Act and 6 powers, he moves against its signatories. A warning comes first; softening the Delegation, scattering the leadership, Senate resolve of 5 or a loyal Navy can prevent the worst.
+
+• *The Admirals Move.* If fear reaches 60, Wilhuff Tarkin leads the Security Bloc and the Navy's loyalty to the Senate is below 50%, the admirals may seize power. A warning comes first; a reformed Senate Guard or a loyal Navy stops them.
+
+• *Confederacy Triumphant.* If the front collapses to −9.5.
+
 @lib_sys_corruption
 is-special: true
 new-page: true
@@ -199,7 +265,7 @@ go-to: lib_sys_menu
 
 Corruption lowers faith and shrinks the Core Moderates. It grows Palpatine's bloc by 4% for each point above 55, so his natural support doubles at 80. It feeds Rim and corporate grievances, speeds the Sith's hidden plan, and tilts Chancellor elections toward Palpatine. At 62, scandals begin and the Institutionalists grow restless. The best ending needs corruption below 65, or an Ethics Commission.
 
-**Faith in the Republic** (starts at 50) drifts toward a target rather than moving directly. Corruption, fear, war-weariness and emergency powers lower the target. Each safeguard you pass raises it by 2.5, and so does a larger Caucus. Speeches and good news lift faith for a while, but only a better target makes the change last. Faith grows the Caucus, makes every bloc likelier to vote for reform, and decides a sitting Chancellor's re-election. The best ending needs 55.
+**Faith in the Republic** (starts at 50) drifts toward a target rather than moving directly. Corruption, fear, war-weariness and emergency powers lower the target. Each safeguard you pass raises it by 2.5, and so does a larger Caucus. Speeches and good news lift faith for a while, but only a better target makes the change last. Faith grows the Caucus, makes every bloc likelier to vote for reform, and decides a sitting Chancellor's re-election. The best ending needs 50.
 
 **Fear** (starts at 20) rises fast in a crisis and fades fast once it passes. Dooku's movement, the war, defeats at the front and each wave of secession raise its target. Fear grows Palpatine's bloc and the Security Bloc, lowers faith, speeds the Sith's plan, and makes the Senate readier to hand out emergency powers.
 
@@ -216,7 +282,7 @@ go-to: lib_sys_menu
 
 **Separatism** has two different sources. **Rim worlds** leave over hardship and corruption. Enfranchisement, abolition and relief cut those grievances, and an enfranchised Rim slowly settles back toward loyalty. **Corporate worlds** leave over how the guilds are treated: embargoes, the Trade Federation's break-up, trade taxes and poor relations with the guilds. Both kinds grow much faster once Dooku speaks on Raxus.
 
-From then on, any region whose separatism is above 50 loses delegations every quarter. Each departure shrinks the Senate, raises fear, and leaves the Chancellor's bloc relatively larger. The Clone Wars break out only if Rim worlds have left, a tenth of the Senate has gone, or Rim separatism has reached 55. A guild walkout alone is not enough.
+From then on, any region whose separatism is above 50 loses delegations every quarter. Each departure shrinks the Senate, raises fear, and leaves the Chancellor's bloc relatively larger. Secession brings the war sooner, but **Sidious runs both sides**: if nothing has started it by mid-22 BBY, the Confederacy is armed and the war begins anyway. Only the Federal Compact, or Rim enfranchisement together with real peace talks and a turned Count Dooku, can stop it. Reforms still decide how many worlds leave and how bad the war becomes.
 
 @lib_sys_powers
 is-special: true
@@ -267,6 +333,8 @@ Every bloc's support in every region drifts toward a natural level. Faith grows 
 
 **Incumbency.** Partners in a stable coalition back the sitting Chancellor instead of running against them. The Chancellor's record moves every bloc: faith, corruption, coalition harmony, and whether the war is going badly. A coalition whose dissent reaches 4 falls, unless constructive no-confidence has passed.
 
+**Votes.** Ordinary laws need half the Senate; constitutional amendments need **two-thirds**. While Palpatine's people control the Senate, the **Vice Chair** rules a Caucus reform out of order every two years or so, unless Senate resolve is 3 or more or the Senate Guard has been reformed. On votes about powers and oversight, **delegations on the Chancellery's payroll** follow its line; the more corrupt the Senate and the further the Sith's plan has gone, the more of them there are. If the **bureaucrats** turn cold, our bills also lose support in committee.
+
 **Relations** with other blocs fade each quarter toward each bloc's natural attitude toward the Caucus, which depends on its leader. The Core Moderates are usually the friendliest; the guilds and the Separatists the coldest. Relations decide coalitions (every partner must be at about 35, higher under a hardliner and lower under a pragmatist) and sway votes and elections. Inter-bloc Relations, advisors and policies a bloc likes raise them.
 
 **Leaders.** A bloc's leader decides how firmly it holds its line, how it leans on each kind of vote, and which blocs it refuses to govern with. See *Leaders and their views*.
@@ -290,7 +358,7 @@ go-to: lib_sys_menu
 
 • Hawks: a Defence Pact or forces of our own once Dooku moves, and a war that isn't being lost.
 
-Each new leader brings different demands. Overall dissent shrinks most of the Caucus's gains and its natural size, and changes the yearly capital bonus. At about 60 (70 for the Institutionalists), a faction breaks, sooner under a firm leader and later under a pragmatist. The Institutionalists' crisis costs capital and support, the Rimward walk out to form the Rim Freedom Caucus, the Pacifists resign their posts, and the Hawks defect to the Security Bloc.
+Each new leader brings different demands. Overall dissent shrinks most of the Caucus's gains and its natural size, and changes the yearly capital bonus. At about 60 (70 for the Institutionalists), a faction breaks, sooner under a firm leader and later under a pragmatist. A faction that breaks takes its senators with it, to the nearest bloc or, under a firm leader, to a party of its own. The event says how many leave. Without advisors from a faction, its dissent climbs quickly, so keep the leadership balanced.
 
 @lib_sys_war
 is-special: true
@@ -299,9 +367,9 @@ go-to: lib_sys_menu
 
 = The war, Anakin and the final reckoning
 
-**The front** runs from −10 to +10. Sidious wants a long war, so if nobody pushes, it drifts toward a slow Republic advance. Funding the front, Jedi generals and a turned Dooku push it forward. Every quarter of war drains the treasury, adds corruption, Rim hardship and war-weariness, and wears down the Jedi. The war ends with the Federal Compact, with victory at +9, or with a Treaty of Separation if the front is behind or weariness reaches 60. At −9.5, the Confederacy wins.
+**The front** runs from −10 to +10. Sidious wants a long war, so if nobody pushes, it drifts toward a slow Republic advance. Funding the front, Jedi generals and a turned Dooku push it forward. Every quarter of war drains the treasury, adds corruption, Rim hardship and war-weariness, and wears down the Jedi. The war ends with the Federal Compact, with victory at +9, or with a Treaty of Separation if the front is behind or weariness reaches 60. At −9.5, the Confederacy wins. If the game ends with the war still raging, the front decides: well behind means the Confederacy wins, roughly even means **the Endless War**.
 
-**Anakin** is hidden too. Palpatine's grip on him tightens with Shmi's death, Qui-Gon's death, Palpatine's mentorship, the Council seat and every quarter of war. Freeing Shmi, an honest marriage accepted by a reformed Council, Padmé and honesty from the Jedi pull him back. At the arrest, an Anakin still in the light helps Windu; one far gone strikes Windu down.
+**Anakin** is hidden too. Palpatine's grip on him tightens with Shmi's death, Qui-Gon's death, Palpatine's mentorship, the Council seat and every quarter of war. Freeing Shmi, an honest marriage accepted by a reformed Council, Padmé and honesty from the Jedi pull him back. At the arrest, an Anakin still in the light helps Windu; one far gone strikes Windu down. **The arrest has to be earned**: a Senate warrant, a reformed Senate Guard, strong Judicial Forces, conclusive evidence and a Jedi Order not worn down by the war each make it likelier. A raid without them usually fails, as Windu's did.
 
 **The final reckoning.** If it comes to a fight, the game weighs everyone loyal to the Senate against everyone who would obey the Sith Lord. The Senate side has the Jedi (scaled by public trust), the Judicial Forces, the Defence Pact, the Senate Guard (if it was reformed or the Chancellery is yours), unchipped clones, a loyal Navy and Anakin. The Sith side has chipped clones, the Guard and the sector governors if his camp holds the Chancellery, a disloyal Navy, the Security Bloc's men and Vader. Clearly stronger means victory, roughly even means a long civil war, and much weaker means the Empire. Acting without a Senate warrant risks a Jedi Protectorate, even in victory.
 
@@ -315,7 +383,7 @@ Some reforms permanently close doors that the Sith would otherwise walk through.
 
 **Sunset clauses** (Constitutional Reform): emergency powers expire unless renewed each year. **Term limits entrenched** (Constitutional Reform): no Chancellor can have his term extended. **Senate oversight of the army** (Security & Defence, or at Kamino and Geonosis): the clones answer to the Senate too. **Senate Guard reformed** (Security & Defence): the Red Guards stop answering to the Chancellor alone. **Jedi independence** (Constitutional Reform): the Chancellor cannot place the Council under his authority. **Banking independence** (Finance & Commerce): the Chancellery cannot seize the banks. **Rim enfranchisement** (Outer Rim Affairs or Constitutional Reform): a lasting cure for separatism. **Ethics Commission** (Judiciary & Intelligence): a lasting check on corruption. **Inhibitor chips removed** (Clone Army Oversight, once found): Order 66 will fail.
 
-Most of these need a seat in government and a Senate majority. Some need three-fifths.
+Most of these need a seat in government and a Senate majority. Constitutional amendments need two-thirds.
 
 @lib_charts
 is-special: true

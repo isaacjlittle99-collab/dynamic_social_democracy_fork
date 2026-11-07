@@ -69,17 +69,17 @@ new-page: true
 - @start_menu: Back
 
 @diff_story
-subtitle: More political capital, friendlier blocs, and you can return cards to your hand.
+subtitle: A hand of four cards, more political capital, friendlier blocs, and you can return cards to your hand.
 on-arrival: {! SW.newGame(Q, -1); !}
 go-to: setup
 
 @diff_senator
-subtitle: The intended experience. You can return cards to your hand.
+subtitle: The intended experience: a hand of three, scarce capital, and a Sith Lord who plays back. You can return cards to your hand.
 on-arrival: {! SW.newGame(Q, 0); !}
 go-to: setup
 
 @diff_master
-subtitle: Scarce capital, a more divided Caucus, a head start for the Sith, and no undo.
+subtitle: No starting capital, no emergency fundraising, a restless Caucus, colder blocs, a head start for the Sith, and no undo.
 on-arrival: {! SW.newGame(Q, 1); !}
 go-to: setup
 

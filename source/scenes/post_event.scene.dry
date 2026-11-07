@@ -13,6 +13,7 @@ if (Q.turn_actions >= 1 && !Q.game_ending) {
 }
 if (Q.clear_hand && this.state.currentHands) {
     this.state.currentHands.main = [];
+    this.state.currentHands.main_story = [];
     Q.clear_hand = 0;
 }
 // 2. recompute everything that is derived from state
@@ -36,9 +37,9 @@ Q.pinnedCardsDescription = 'Advisors (one action shared between them): ' +
     (t <= 0 ? 'an action is available.' : 'next action in ' + t + ' ' + unit + (t === 1 ? '' : 's') + '.') +
     (Q.shuffle_timer <= 0 ? ' The Caucus leadership can be reshuffled.' : '');
 Q.handDescription = 'Your hand - play one card to end the turn.';
-Q.deckDescription = 'Decks - click a deck to draw a card (hand holds three).';
+Q.deckDescription = 'Decks - click a deck to draw a card (hand holds ' + (Q.difficulty < 0 ? 'four' : 'three') + ').';
 !}
-go-to: ending_router if force_end = 1 or game_ending = 1; events_choice if has_event = 1 and not force_end and not game_ending; main if has_event = 0 and not force_end and not game_ending
+go-to: ending_router if force_end = 1 or game_ending = 1; events_choice if has_event = 1 and not force_end and not game_ending; main if has_event = 0 and not force_end and not game_ending and difficulty >= 0; main_story if has_event = 0 and not force_end and not game_ending and difficulty < 0
 
 = [+ date_label +]
 

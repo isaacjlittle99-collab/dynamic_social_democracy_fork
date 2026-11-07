@@ -1,0 +1,20 @@
+title: The Bureaucrats Strike
+subtitle: The true rulers of the Republic move against the Caucus.
+tags: event
+view-if: bureau_relation <= 0 and (rc_in_govt or rc_chairs > 0) and not finale and not game_ending
+priority: 6
+new-page: true
+face-image: img/ev_chancellery.svg
+on-arrival: {! SW.bureauPurge(Q); !}
+
+= The Bureaucrats Strike
+
+[? if bp_gov : **The Reorganisation.** Overnight, the Senate's administrative staff announce a "reorganisation of committee responsibilities". The Caucus's chairs are gone. Our people find their offices reassigned and their files transferred. The coalition carries on without us. "Nothing personal," a committee secretary explains. "The Senate must be governable." ?]
+
+[? if bp_chancellor : **Valorum's fate.** A crisis breaks that the Chancellery seems to have heard about last: a shipping scandal, documents leaked to the HoloNet, a sector governor resigning in protest. Within days, the Senate is debating whether Chancellor [+ chancellor +] can still govern. ?]
+
+[? if bp_vote : [+ vote_html +] ?]
+
+[? if bp_fell : The Senate withdraws its confidence. A new Chancellor will be elected. ?][? if bp_saved : The constructive no-confidence rule saves the government: the plotters cannot agree on a successor, and the motion dies. ?][? if bp_survived : Chancellor [+ chancellor +] survives, barely. ?]
+
+The bureaucrats are satisfied, for now. *(The Senate bureaucracy is merely **cool** towards us again.)*

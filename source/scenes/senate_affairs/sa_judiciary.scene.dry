@@ -16,6 +16,7 @@ The Caucus chairs the Judiciary & Intelligence Committee: the Republic's courts,
 - @intel: Order an intelligence review of the Chancellery's contacts.
 - @gunray: Press the case against Nute Gunray.
 - @warrant: Prepare a Senate warrant for the Sith Lord.
+- @bureau_reform: Reform the Senate bureaucracy.
 - @easy_discard
 
 @prosecute
@@ -64,3 +65,12 @@ unavailable-subtitle: Needs compelling evidence (8+).
 on-arrival: warrant = 1; senate_resolve += 0.5
 
 A sealed warrant is drafted and signed by three justices of the Supreme Court. It names no one yet. It does not need to. If the moment comes, the Jedi will be acting for the Senate, not against it.
+
+@bureau_reform
+view-if: bureau_reform_timer <= 0 and bureau_relation < 70
+subtitle: −2 political capital. Clears out the guilds' placemen: the bureaucracy warms to us considerably, the guilds less so.
+choose-if: capital >= 2
+unavailable-subtitle: Needs 2 political capital.
+on-arrival: capital -= 2; bureau_relation += 30; guild_relation -= 5; inst_dissent -= 3; bureau_reform_timer = 6
+
+The Committee audits the Senate's payroll. Forty officials on retainer to the Trade Federation are quietly retired; their replacements owe their jobs to the reform. For a while, at least, the Caucus's bills reach the floor on time.

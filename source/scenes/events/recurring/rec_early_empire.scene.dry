@@ -1,0 +1,16 @@
+title: The New Order, Early
+subtitle: The Chancellor seizes his moment.
+tags: event
+view-if: pal_chancellor and emergency_powers >= 8 and senate_resolve < 5 and (fear >= 45 or war) and not finale and not game_ending
+priority: 20
+new-page: true
+face-image: img/ev_chancellery.svg
+on-arrival: {! Q.empire_declared = 1; Q.game_ending = 1; Q.early_empire = 1; Q.seeds = (Q.delegation_formed || Q.pact_formed) ? 1 : 0; !}
+
+= The New Order, Early
+
+A bomb in the Senate district. A rumour of a Jedi plot. Within a week the Chancellor addresses a frightened Senate: the Republic, he says, must be reorganised into a safer and more secure society.
+
+There is no vote worth the name. The Senate that gave him eight emergency powers has nothing left to refuse him with.
+
+*The Chancellor held 8 emergency powers while the Senate's resolve was below 5. A Senate that has given away that much cannot stop him.*

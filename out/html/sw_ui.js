@@ -111,6 +111,9 @@
       var ref = SW.leader ? (SW.leader(Q, bb).refuses || []).filter(function (x) { return Q.parties.indexOf(x) >= 0; }) : [];
       if (ref.length) h += '<div class="sb-note">' + Q[bb + '_leader'] + ' won\'t govern with the ' + ref.map(function (x) { return SW.name(Q, x); }).join(' or the ') + '.</div>';
     }
+    // the Senate's permanent staff, shown like a bloc ("the true rulers of the Republic")
+    h += row('The Senate bureaucracy', SW.label('relation', Q.bureau_relation));
+    if (Q.bureau_relation < 25 && (Q.rc_in_govt || Q.rc_chairs > 0)) h += '<div class="sb-note warn">Our bills are being lost in committee.</div>';
     h += head('Committee chairs');
     for (var c = 0; c < SW.COMMITTEES.length; c++) {
       var cm = SW.COMMITTEES[c];
@@ -126,6 +129,12 @@
     h += row('Jedi suspicion', SW.label('resolve', Q.jedi_suspicion)) + bar(Q.jedi_suspicion, 10, 'good-fill');
     h += row('Senate resolve', SW.label('resolve', Q.senate_resolve)) + bar(Q.senate_resolve, 10, 'good-fill');
     h += row('Emergency powers', SW.label('powers', Q.emergency_powers)) + bar(Q.emergency_powers, 10, 'bad-fill');
+    if (Q.misfortunes && Q.misfortunes.length) {
+      h += head('Recent misfortunes');
+      for (var mf = Q.misfortunes.length - 1; mf >= 0; mf--) h += '<div class="sb-note">' + Q.misfortunes[mf] + '.</div>';
+    }
+    if (Q.evidence >= 6 && Q.bureau_captured > 0) h += '<p class="sb-note warn">The bureaucracy\'s payroll leads to the Chancellery.</p>';
+    else if (Q.evidence >= 6) h += '<p class="sb-note">The bureaucracy\'s payroll leads to the Trade Federation, and through it to someone else.</p>';
     h += head('Safeguards');
     var reforms = [
       ['emergency_sunset', 'Sunset clauses on emergency powers'],
@@ -223,6 +232,7 @@
     ['ending_admirals', 'The Admirals\' Republic', 'Destroy the Sith Lord but not his powers.'],
     ['ending_hollow_crown', 'The Hollow Crown', 'Become what you fought.'],
     ['ending_confederacy', 'Confederacy Triumphant', 'Lose the Clone Wars.'],
+    ['ending_endless_war', 'The Endless War', 'End the game with the Clone Wars still raging and neither side able to win.'],
     ['ending_dissolved', 'A Republic Dissolved', 'Let the Separatists go in peace.'],
     ['ending_empire', 'The Galactic Empire', 'So this is how liberty dies.'],
     ['caucus_chancellor', 'A Reformer in the Chair', 'Elect a Caucus Supreme Chancellor.'],

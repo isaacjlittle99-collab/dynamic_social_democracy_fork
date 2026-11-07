@@ -1,0 +1,37 @@
+title: Officers' Talk
+subtitle: The fleet is restless.
+tags: event
+view-if: fear >= 60 and sec_leader_id = "tarkin" and navy_loyalty < 50 and not pal_chancellor and not puppet_chancellor and date >= 108 and not coup_warned and not finale and not game_ending
+priority: 4
+new-page: true
+face-image: img/ev_war.svg
+on-arrival: coup_warned = 1
+
+= Officers' Talk
+
+Fleet officers loyal to Wilhuff Tarkin have been meeting aboard a Star Destroyer above Eriadu. They talk about a Senate too weak to win the war, and about what disciplined men could do about it.
+
+*With fear this high and the Navy's loyalty to the Senate this low, the Security Bloc could attempt a coup. A Navy at least 50% loyal, or a Senate Guard that answers to the Senate, would stop it.*
+
+- @purge: Have the plotters reassigned.
+- @reassure: Reassure the fleet.
+- @ignore: Officers always talk.
+
+@purge
+view-if: chair_security = "rc" or rc_chancellor
+subtitle: The Navy's loyalty to the Senate rises; the Security Bloc is furious.
+on-arrival: navy_loyalty += 15; sec_relation -= 10; hawk_dissent += 3
+
+The plotters find themselves commanding supply depots on the far side of the galaxy.
+
+@reassure
+subtitle: −1 political capital; the Navy's loyalty rises.
+choose-if: capital >= 1
+unavailable-subtitle: Needs 1 political capital.
+on-arrival: capital -= 1; navy_loyalty += 10
+
+Caucus senators tour the fleet, promise new ships and better pay, and listen to the officers' complaints.
+
+@ignore
+
+Officers always talk.

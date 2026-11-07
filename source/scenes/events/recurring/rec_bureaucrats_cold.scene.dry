@@ -1,0 +1,38 @@
+title: Lost in Committee
+subtitle: The bureaucrats are slow-walking our bills.
+tags: event
+view-if: bureau_relation < 25 and (rc_in_govt or rc_chairs > 0) and not bureau_warn_cold and not finale and not game_ending
+priority: 2
+new-page: true
+face-image: img/ev_chancellery.svg
+on-arrival: bureau_warn_cold = 1
+
+= Lost in Committee
+
+Caucus amendments have started to go missing. Hearings are postponed for "scheduling reasons". Briefing papers arrive the morning after the vote. The Senate bureaucracy has turned **cold** towards the Caucus.
+
+They dislike the company we keep in government and the reforms we have pushed through. Until relations improve, **our reform bills lose support in committee** (3 points off every vote we sponsor). If they turn hostile, they will try to force us out.
+
+*Ways to win them back: Finis Valorum, Bail Organa or Bail Antilles can work with the bureaucrats as advisors; the Judiciary & Intelligence Committee can reform the bureaucracy; a more establishment coalition, or easing off the guilds, reassures them.*
+
+- @soothe: Make concessions to the committee staff.
+- @expose: Expose the obstruction publicly.
+- @carry_on: Carry on regardless.
+
+@soothe
+subtitle: −1 political capital; the bureaucrats are mollified for now.
+choose-if: capital >= 1
+unavailable-subtitle: Needs 1 political capital.
+on-arrival: capital -= 1; bureau_relation += 10
+
+New office space, a few promotions, a quiet word that the Caucus is "not unreasonable". The missing amendments reappear.
+
+@expose
+subtitle: The Senate takes note; the bureaucrats take it personally.
+on-arrival: senate_resolve += 0.5; faith += 0.5; bureau_relation -= 5
+
+The HoloNet runs the story of the amendments that vanished. The Senate is briefly outraged. The bureaucracy is not briefly anything.
+
+@carry_on
+
+The Caucus will not be bullied by clerks. The clerks make a note of it.

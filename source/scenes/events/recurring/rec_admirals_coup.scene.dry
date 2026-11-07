@@ -1,0 +1,16 @@
+title: The Admirals Move
+subtitle: The Security Bloc seizes power.
+tags: event
+view-if: coup_warned and fear >= 60 and sec_leader_id = "tarkin" and navy_loyalty < 50 and not senate_guard_reformed and not pal_chancellor and not puppet_chancellor and not coup_done and not finale and not game_ending
+priority: 15
+new-page: true
+face-image: img/ev_war.svg
+on-arrival: {! Q.coup_done = 1; Q.admirals_coup = 1; Q.game_ending = 1; !}
+
+= The Admirals Move
+
+Star Destroyers take station over the Senate district. Wilhuff Tarkin addresses the galaxy: the Senate has failed, the war must be won, and a Council of Admirals will govern "until victory".
+
+The Senate Guard, still answering only to the Chancellery, stands aside. Within a day the Republic's Senate is a museum.
+
+*Fear was at 60 or more, Tarkin led the Security Bloc, the Navy's loyalty to the Senate was below 50%, and the Senate Guard had not been reformed.*

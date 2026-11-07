@@ -1,7 +1,7 @@
 title: The Battle of Geonosis
 subtitle: Jedi are trapped on Geonosis. The Senate must decide whether to go to war.
 tags: event
-view-if: date >= 135 and dooku_movement and not war and not geonosis_seen and ((seceded_total >= 5 and (outer_seceded > 0.02 or midrim_seceded > 0.02)) or seceded_total >= 10 or outer_sep >= 55 or midrim_sep >= 55)
+view-if: date >= 135 and dooku_movement and not war and not geonosis_seen and ((seceded_total >= 5 and (outer_seceded > 0.02 or midrim_seceded > 0.02)) or seceded_total >= 10 or outer_sep >= 55 or midrim_sep >= 55 or (force_war and date >= 141 and not federal_compact and not (rim_enfranchised and peace_talks >= 2 and dooku_turned)))
 max-visits: 1
 priority: 5
 new-page: true
@@ -17,7 +17,7 @@ Q.ep_cost = 2 + (Q.mca_result === 'passed' ? 1 : 0);
 
 = The Battle of Geonosis
 
-On Geonosis, the Jedi have discovered a vast droid army being built for the Confederacy. Obi-Wan Kenobi has been captured, and Anakin Skywalker and Padmé Amidala have gone after him. The Jedi Council is sending every Knight it has. They will be massacred without support.
+[? if seceded_total < 5 : Few worlds have actually left the Republic. It does not matter. Someone has armed the Confederacy anyway, and someone wants this war. ?] On Geonosis, the Jedi have discovered a vast droid army being built for the Confederacy. Obi-Wan Kenobi has been captured, and Anakin Skywalker and Padmé Amidala have gone after him. The Jedi Council is sending every Knight it has. They will be massacred without support.
 
 [? if kamino_army : The clone army of Kamino is ready, but the Senate has never authorised it. ?][? if not kamino_army : The clone army was decommissioned. The Republic has only the Judicial Forces ([+ judicial_forces : strength +]) and whatever member worlds will send. ?] [? if mca_result = "oversight" : Under the Caucus's amendment, any army deployed now would answer to a Senate oversight committee. ?]
 

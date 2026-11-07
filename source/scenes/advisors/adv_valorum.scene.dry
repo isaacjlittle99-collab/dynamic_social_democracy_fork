@@ -14,14 +14,14 @@ Brought down by the Naboo crisis, Valorum has had time to think about who arrang
 
 - @valorum_networks: Old Chancellery networks.
 - @valorum_elder: Elder statesman.
-- @valorum_bureaucracy: Bureaucratic know-how.
+- @valorum_bureaucracy: Call in favours from the civil service.
 - @go_back: Back.
 
 @valorum_networks
 subtitle: +1 evidence (less each time).
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: evidence += 1 / (1 + valorum_leads); valorum_leads += 1; advisor_action_timer = 4
+on-arrival: evidence += 1 / (1 + valorum_leads); valorum_leads += 1; advisor_action_timer = 5
 
 Valorum still has friends in the Chancellery’s offices. They remember which visitors came to the Naboo delegation late at night.
 
@@ -29,14 +29,14 @@ Valorum still has friends in the Chancellery’s offices. They remember which vi
 subtitle: +6 relations with the Core Moderates.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: mod_relation += 6; advisor_action_timer = 4
+on-arrival: mod_relation += 6; advisor_action_timer = 5
 
 The Core Moderates still remember Valorum’s better days. He reminds them that the Caucus kept faith with him.
 
 @valorum_bureaucracy
-subtitle: −2 corruption.
+subtitle: Warms the Senate bureaucracy towards us considerably; −1 corruption.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: corruption -= 2; advisor_action_timer = 4
+on-arrival: bureau_relation += 15; corruption -= 1; advisor_action_timer = 5
 
-Valorum knows exactly which audits were never finished. He hands the list to the Caucus.
+Valorum ran the Senate's machinery for years. He knows which clerks owe him favours, which committee secretaries he promoted, and which audits were never finished. He calls the favours in.

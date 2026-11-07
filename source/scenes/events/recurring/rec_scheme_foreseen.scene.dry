@@ -1,0 +1,38 @@
+title: A Disturbance in the Force
+subtitle: Something is being prepared against us.
+tags: event
+view-if: scheme_pending != "" and scheme_foreseen and not scheme_warned and not finale and not game_ending
+priority: 2
+new-page: true
+face-image: img/ev_shadow.svg
+on-arrival: scheme_warned = 1
+
+= A Disturbance in the Force
+
+[+ scheme_foresee +]
+
+*Because we have been watching closely, we have a turn to act. Whoever is behind this will strike next turn unless we stop it.*
+
+- @counter: [+ scheme_counter +] (1 political capital).
+- @counter_adv: [+ scheme_counter +], through one of our advisors.
+- @ignore: We cannot chase every shadow.
+
+@counter
+subtitle: −1 political capital. The plot will be foiled.
+choose-if: capital >= 1
+unavailable-subtitle: Needs 1 political capital.
+on-arrival: capital -= 1; scheme_countered = 1
+
+The Caucus quietly moves to head it off.
+
+@counter_adv
+subtitle: Uses our advisors' shared action. The plot will be foiled.
+choose-if: advisor_action_timer <= 0 and n_advisors >= 1
+unavailable-subtitle: Our advisors have already acted recently.
+on-arrival: advisor_action_timer = 5; scheme_countered = 1
+
+One of our advisors takes it in hand.
+
+@ignore
+
+We let it go, and hope it was nothing.

@@ -182,6 +182,7 @@ The rotunda erupts. For the first time in a generation, a reformer holds the Rep
 
 @el_coal_0
 view-if: el_opt0
+subtitle: [+ el_opt0_bureau +]
 choose-if: el_opt0_ok
 unavailable-subtitle: [+ el_opt0_why +]
 on-arrival: {! SW.chooseRcCoalition(Q, 0); !}
@@ -189,6 +190,7 @@ go-to: el_chairs
 
 @el_coal_1
 view-if: el_opt1
+subtitle: [+ el_opt1_bureau +]
 choose-if: el_opt1_ok
 unavailable-subtitle: [+ el_opt1_why +]
 on-arrival: {! SW.chooseRcCoalition(Q, 1); !}
@@ -196,6 +198,7 @@ go-to: el_chairs
 
 @el_coal_2
 view-if: el_opt2
+subtitle: [+ el_opt2_bureau +]
 choose-if: el_opt2_ok
 unavailable-subtitle: [+ el_opt2_why +]
 on-arrival: {! SW.chooseRcCoalition(Q, 2); !}
@@ -203,6 +206,7 @@ go-to: el_chairs
 
 @el_coal_3
 view-if: el_opt3
+subtitle: [+ el_opt3_bureau +]
 choose-if: el_opt3_ok
 unavailable-subtitle: [+ el_opt3_why +]
 on-arrival: {! SW.chooseRcCoalition(Q, 3); !}
@@ -210,6 +214,7 @@ go-to: el_chairs
 
 @el_coal_4
 view-if: el_opt4
+subtitle: [+ el_opt4_bureau +]
 choose-if: el_opt4_ok
 unavailable-subtitle: [+ el_opt4_why +]
 on-arrival: {! SW.chooseRcCoalition(Q, 4); !}
@@ -217,6 +222,7 @@ go-to: el_chairs
 
 @el_coal_5
 view-if: el_opt5
+subtitle: [+ el_opt5_bureau +]
 choose-if: el_opt5_ok
 unavailable-subtitle: [+ el_opt5_why +]
 on-arrival: {! SW.chooseRcCoalition(Q, 5); !}
@@ -224,6 +230,7 @@ go-to: el_chairs
 
 @el_coal_6
 view-if: el_opt6
+subtitle: [+ el_opt6_bureau +]
 choose-if: el_opt6_ok
 unavailable-subtitle: [+ el_opt6_why +]
 on-arrival: {! SW.chooseRcCoalition(Q, 6); !}
@@ -241,6 +248,7 @@ SW.setGovt(Q, members);
 Q.el_invited = (Q.el_winner !== 'cis' && SW.affinity(Q, Q.el_winner, 'rc') >= 38 && Q.rc_r >= 5) ? 1 : 0;
 if (Q.el_backing === Q.el_winner) Q.el_invited = 1;
 Q.el_pal_won = Q.el_winner === 'pal' ? 1 : 0;
+Q.el_join_bureau = SW.bureauReaction(SW.bureauComfort(Q, (Q.govt_blocs || []).concat(['rc'])));
 SW.assignChairs(Q);
 !}
 
@@ -257,7 +265,7 @@ SW.assignChairs(Q);
 
 @el_join
 view-if: el_invited
-subtitle: [? if el_pal_won : Palpatine's coalition gives us chairs and access, but ties our name to his. ?][? if not el_pal_won : Committee chairs, and a share of responsibility. ?]
+subtitle: [? if el_pal_won : Palpatine's coalition gives us chairs and access, but ties our name to his. ?][? if not el_pal_won : Committee chairs, and a share of responsibility. ?] [+ el_join_bureau +]
 on-arrival: {! SW.joinGovernment(Q); if (Q.el_pal_won) { Q.pacifist_dissent += 4; Q.pal_relation += 5; } !}
 go-to: el_chairs
 

@@ -21,7 +21,7 @@ Pantora’s young senator is honest to the point of naivety. That makes her surp
 subtitle: −1 corruption, +1 faith.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: corruption -= 1; faith += 1; advisor_action_timer = 4
+on-arrival: corruption -= 1; faith += 1; advisor_action_timer = 5
 
 Chuchi publishes her entire office’s accounts. Dozens of senators are suddenly very uncomfortable.
 
@@ -29,7 +29,7 @@ Chuchi publishes her entire office’s accounts. Dozens of senators are suddenly
 subtitle: Cools Outer Rim separatism; +4 relations with the Rimward Coalition.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: outer_sep -= 3; rim_relation += 4; advisor_action_timer = 4
+on-arrival: outer_sep -= 3; rim_relation += 4; advisor_action_timer = 5
 
 Chuchi tours refugee worlds on the Rim and brings their delegates to Coruscant to testify.
 
@@ -38,6 +38,6 @@ view-if: clones > 0
 subtitle: The clones trust the Senate a little more.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: navy_loyalty += 3; clone_trust += 1; advisor_action_timer = 4
+on-arrival: navy_loyalty += 3; clone_trust += 1; advisor_action_timer = 5
 
 Chuchi visits a clone medical frigate and listens. The troopers are not used to being listened to.

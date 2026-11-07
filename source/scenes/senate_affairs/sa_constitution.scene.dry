@@ -4,12 +4,12 @@ is-card: true
 tags: senate_affairs
 card-image: img/card_law.svg
 view-if: constitution_timer <= 0 and rc_in_govt and (chair_judiciary = "rc" or rc_chancellor) and cardok_constitution
-on-arrival: turn_actions += 1; constitution_timer = 3; last_card_timer = "constitution"
+on-arrival: amend_threshold = 66.7 if faith < 60; amend_threshold = 60 if faith >= 60; turn_actions += 1; constitution_timer = 3; last_card_timer = "constitution"
 new-page: true
 
 = Constitutional Reform
 
-Constitutional amendments need **three-fifths** of the Senate. Each attempt costs 1 political capital, whether it passes or not. Senate resolve ([+ senate_resolve : resolve +]) and faith in the Republic ([+ faith : faith +]) make reform easier.
+Constitutional amendments need **two-thirds** of the Senate (three-fifths if faith in the Republic is 60 or more, because the member worlds can be asked to ratify them), and delegations on the Chancellery's payroll vote against anything that limits it. Each attempt costs 1 political capital, whether it passes or not. Senate resolve ([+ senate_resolve : resolve +]) and faith in the Republic ([+ faith : faith +]) make reform easier.
 
 - @sunset: Sunset clauses on all emergency powers.
 - @terms: Entrench the Chancellor's term limit.
@@ -28,13 +28,13 @@ on-arrival: {!
 Q.capital -= 1;
 var st = SW.stance(Q, {mod: 0.6, guild: 0.55, rim: 0.65, sec: 0.25, ind: 0.6, pal: 0.15 + (Q.emergency_powers < 1 ? 0.25 : 0), cis: 0.6}, true);
 Q.cr_vote = SW.vote(Q, st, 1, 'oversight');
-Q.vote_html = SW.voteBanner('Sunset Amendment', Q.cr_vote, 60);
-if (Q.cr_vote >= 60) { Q.emergency_sunset = 1; Q.faith += 1; this.achieve('sunset'); }
+Q.vote_html = SW.voteBanner('Sunset Amendment', Q.cr_vote, Q.amend_threshold);
+if (Q.cr_vote >= Q.amend_threshold) { Q.emergency_sunset = 1; Q.faith += 1; this.achieve('sunset'); }
 !}
 
 [+ vote_html +]
 
-[? if emergency_sunset : From now on, every emergency power granted to the Chancellor expires after a year unless the Senate votes to renew it. ?][? if not emergency_sunset : The amendment falls short of the three-fifths it needs. ?]
+[? if emergency_sunset : From now on, every emergency power granted to the Chancellor expires after a year unless the Senate votes to renew it. ?][? if not emergency_sunset : The amendment fails. ?]
 
 @terms
 view-if: not term_limits_protected
@@ -45,8 +45,8 @@ on-arrival: {!
 Q.capital -= 1;
 var st = SW.stance(Q, {mod: 0.65, guild: 0.5, rim: 0.65, sec: 0.35, ind: 0.6, pal: (Q.pal_chancellor ? 0.05 : 0.4), cis: 0.6}, true);
 Q.cr_vote = SW.vote(Q, st, 1, 'oversight');
-Q.vote_html = SW.voteBanner('Term Limits Amendment', Q.cr_vote, 60);
-if (Q.cr_vote >= 60) { Q.term_limits_protected = 1; Q.faith += 1; }
+Q.vote_html = SW.voteBanner('Term Limits Amendment', Q.cr_vote, Q.amend_threshold);
+if (Q.cr_vote >= Q.amend_threshold) { Q.term_limits_protected = 1; Q.faith += 1; }
 !}
 
 [+ vote_html +]
@@ -62,8 +62,8 @@ on-arrival: {!
 Q.capital -= 1;
 var st = SW.stance(Q, {mod: 0.7, guild: 0.45, rim: 0.45, sec: 0.5, ind: 0.55, pal: 0.3, cis: 0.3}, true);
 Q.cr_vote = SW.vote(Q, st, 1, 'oversight');
-Q.vote_html = SW.voteBanner('Constructive No-Confidence Amendment', Q.cr_vote, 60);
-if (Q.cr_vote >= 60) { Q.constructive_vonc = 1; Q.coalition_dissent -= 1; }
+Q.vote_html = SW.voteBanner('Constructive No-Confidence Amendment', Q.cr_vote, Q.amend_threshold);
+if (Q.cr_vote >= Q.amend_threshold) { Q.constructive_vonc = 1; Q.coalition_dissent -= 1; }
 !}
 
 [+ vote_html +]
@@ -80,8 +80,8 @@ Q.capital -= 1;
 var st = SW.stance(Q, {mod: 0.6, guild: 0.4, rim: 0.55, sec: 0.25, ind: 0.6, pal: 0.15, cis: 0.4}, true);
 st.mod += (Q.jedi_standing - 50) / 200; st.ind += (Q.jedi_standing - 50) / 200;
 Q.cr_vote = SW.vote(Q, st, 1, 'oversight');
-Q.vote_html = SW.voteBanner('Jedi Independence Amendment', Q.cr_vote, 60);
-if (Q.cr_vote >= 60) { Q.jedi_independence = 1; Q.jedi_relation += 10; }
+Q.vote_html = SW.voteBanner('Jedi Independence Amendment', Q.cr_vote, Q.amend_threshold);
+if (Q.cr_vote >= Q.amend_threshold) { Q.jedi_independence = 1; Q.jedi_relation += 10; }
 !}
 
 [+ vote_html +]
@@ -97,8 +97,8 @@ on-arrival: {!
 Q.capital -= 1;
 var st = SW.stance(Q, {mod: 0.35, guild: 0.25, rim: 0.95, sec: 0.2, ind: 0.6, pal: 0.35, cis: 0.75}, true);
 Q.cr_vote = SW.vote(Q, st, 1, 'rim');
-Q.vote_html = SW.voteBanner('Rim Representation Amendment', Q.cr_vote, 60);
-if (Q.cr_vote >= 60) { Q.rim_enfranchised = 1; Q.outer_sep -= 10; Q.midrim_sep -= 6; Q.rim_relation += 10; Q.outer_rc += 3; this.achieve('enfranchised'); }
+Q.vote_html = SW.voteBanner('Rim Representation Amendment', Q.cr_vote, Q.amend_threshold);
+if (Q.cr_vote >= Q.amend_threshold) { Q.rim_enfranchised = 1; Q.outer_sep -= 10; Q.midrim_sep -= 6; Q.rim_relation += 10; Q.outer_rc += 3; this.achieve('enfranchised'); }
 !}
 
 [+ vote_html +]

@@ -1,0 +1,36 @@
+title: Lists of Names
+subtitle: The Chancellery is drawing up lists.
+tags: event
+view-if: delegation_formed and pal_chancellor and emergency_powers >= 6 and security_act and senate_resolve < 5 and not arrests_warned and not finale and not game_ending
+priority: 4
+new-page: true
+face-image: img/ev_shadow.svg
+on-arrival: arrests_warned = 1
+
+= Lists of Names
+
+A clerk in the Senate Bureau of Intelligence, risking her career, brings us a copy of a document. It lists every senator who signed the Delegation's statement, with notes on their families, their debts and their "associations". Under the Security Act, the Chancellor can order their detention without trial.
+
+*If nothing changes, the arrests will begin next turn. Senate resolve of 5, or a Navy that is at least 60% loyal to the Senate, would make him think twice.*
+
+- @tame: Persuade the Delegation to soften its stand.
+- @scatter: Scatter the leadership before the arrests.
+- @stand: Stand firm. Let him try.
+
+@tame
+subtitle: The Delegation backs down; the arrests are called off, at a cost.
+on-arrival: arrests_tamed = 1; senate_resolve -= 1; pacifist_dissent += 4; faith -= 1
+
+The Delegation issues a second, humbler statement. The lists go back into a drawer. They are not destroyed.
+
+@scatter
+subtitle: −1 political capital. If the arrests come, the Caucus will survive them, though gravely weakened.
+choose-if: capital >= 1
+unavailable-subtitle: Needs 1 political capital.
+on-arrival: capital -= 1; arrests_hedged = 1
+
+Caucus leaders quietly leave Coruscant for their home worlds. Copies of our files go with them.
+
+@stand
+
+The Caucus will not be frightened into silence.

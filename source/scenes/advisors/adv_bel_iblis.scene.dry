@@ -21,7 +21,7 @@ Brilliant, stubborn and suspicious of everyone, Corellia’s senator believes de
 subtitle: +0.6 member-world forces; calms the Hawks.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: member_forces += 0.6; hawk_dissent -= 6; advisor_action_timer = 4
+on-arrival: member_forces += 0.6; hawk_dissent -= 6; advisor_action_timer = 5
 
 Bel Iblis quietly arranges for CorSec to share training and equipment with the security forces of other Caucus worlds.
 
@@ -29,7 +29,7 @@ Bel Iblis quietly arranges for CorSec to share training and equipment with the s
 subtitle: +8 relations with the Security Bloc.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: sec_relation += 8; advisor_action_timer = 4
+on-arrival: sec_relation += 8; advisor_action_timer = 5
 
 The Security Bloc respects strength. Bel Iblis gives them a long talk about it.
 
@@ -37,6 +37,6 @@ The Security Bloc respects strength. Bel Iblis gives them a long talk about it.
 subtitle: −2 corruption, more support in the Core; the Commerce Guilds are furious.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: corruption -= 2; core_rc += 1.5; guild_relation -= 6; advisor_action_timer = 4
+on-arrival: corruption -= 2; core_rc += 1.5; guild_relation -= 6; advisor_action_timer = 5
 
 Bel Iblis names names. The galleries erupt. The trade guilds will not forget this.

@@ -15,13 +15,14 @@ Viceroy, senator and husband to Alderaan’s queen, Bail Organa is a consensus-b
 - @organa_diplomacy: Alderaanian diplomacy.
 - @organa_inquiries: Quiet inquiries among his Jedi friends.
 - @organa_fundraise: Call on Alderaan’s generosity.
+- @organa_bureau: A quiet word with the Senate administrators.
 - @go_back: Back.
 
 @organa_diplomacy
 subtitle: +5 relations with the Core Moderates and Independents, +3 with the Rimward Coalition.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: mod_relation += 5; ind_relation += 5; rim_relation += 3; advisor_action_timer = 4
+on-arrival: mod_relation += 5; ind_relation += 5; rim_relation += 3; advisor_action_timer = 5
 
 Organa hosts a reception at the Alderaanian embassy. By the end of the evening three blocs believe he is on their side, and he is not entirely lying.
 
@@ -29,14 +30,23 @@ Organa hosts a reception at the Alderaanian embassy. By the end of the evening t
 subtitle: +0.5 evidence, +4 relations with the Jedi.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: evidence += 0.3; jedi_relation += 4; jedi_suspicion += 0.3; advisor_action_timer = 4
+on-arrival: evidence += 0.3; jedi_relation += 4; jedi_suspicion += 0.3; advisor_action_timer = 5
 
 Organa shares tea with Jedi he has known for years. They tell him little, but what they leave unsaid is telling.
 
 @organa_fundraise
+view-if: difficulty < 1
 subtitle: +1 political capital; each use irritates the Institutionalists more.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: capital += 1; inst_dissent += 3 + organa_funds * 3; organa_funds += 1; advisor_action_timer = 4
+on-arrival: capital += 1; inst_dissent += 3 + organa_funds * 3; organa_funds += 1; advisor_action_timer = 5
 
 The royal house of Alderaan is generous. It is also keeping count.
+
+@organa_bureau
+subtitle: Warms the Senate bureaucracy towards us.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: Our advisors have already acted recently.
+on-arrival: bureau_relation += 8; advisor_action_timer = 5
+
+Bail Organa never forgets a clerk's name. A few quiet dinners later, the Caucus's paperwork moves a little faster.

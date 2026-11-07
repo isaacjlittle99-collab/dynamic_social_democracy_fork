@@ -1,0 +1,31 @@
+title: Hostages in the Senate
+subtitle: A bounty hunter seizes the Senate building.
+tags: event
+view-if: war and date >= 144 and not hostage_seen and not security_act_seen and not finale and not game_ending
+max-visits: 1
+new-page: true
+face-image: img/ev_war.svg
+on-arrival: hostage_seen = 1; fear += 8
+
+= Hostages in the Senate
+
+The bounty hunter Cad Bane and his gang seize the Senate building and take a group of senators hostage, Caucus members among them. Their price is the release of Ziro the Hutt. After a tense day the Chancellor agrees, the hostages walk free, and the bounty hunters vanish.
+
+How a gang of mercenaries walked into the most guarded building in the galaxy is a question nobody in the Chancellery seems keen to ask. Instead, the Chancellor's allies demand sweeping new security powers.
+
+- @measured: Demand an inquiry, not new powers.
+- @crackdown: Back an immediate security crackdown.
+
+@measured
+subtitle: −1 political capital. Calms the panic; the Security Act will face a fairer fight.
+choose-if: capital >= 1
+unavailable-subtitle: Needs 1 political capital.
+on-arrival: capital -= 1; fear -= 4; senate_resolve += 0.5; evidence += 0.3
+
+The Caucus demands an inquiry into the Senate Guard's failure. It finds that three security codes were changed the night before, on authority nobody can trace.
+
+@crackdown
+subtitle: The Hawks approve; the Security Act will be fast-tracked.
+on-arrival: security_fast = 1; hawk_dissent -= 3; pacifist_dissent += 3
+
+The Senate votes for "whatever it takes". The Chancellor's office has a bill ready.

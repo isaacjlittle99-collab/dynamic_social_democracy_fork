@@ -23,6 +23,10 @@ artwork, music or footage is included; all images are original abstract art.*
 - **Advisors** are pinned cards that share one action every few turns.
 - **The Senate** is made of blocs whose strength comes from regional support, recalculated every year.
   The Supreme Chancellor is elected by coalition, and can be brought down by a vote of no confidence.
+- **The Republic fights back, and so does the Sith Lord.** The Senate bureaucracy (*"the true rulers of the Republic"*)
+  turns on a Caucus that governs with reformers or succeeds too well; a hidden hand answers every success with a
+  scheme; the Vice Chair buries bills and bought delegations follow the Chancellery's line. The Clone Wars come in
+  almost every game. Endings must be earned, and the game can be lost early.
 - **Leaders change with the times.** Every Senate bloc and every faction of the Caucus has a leader.
   A neglected Rim turns to radicals, a frightened Senate to hardliners, and a satisfied faction to pragmatists.
   Leaders decide how firmly a group holds its line, how it votes, whom it will govern with and, inside the Caucus,

@@ -1,0 +1,37 @@
+title: A Firmer Hand
+subtitle: The Chancellor's allies are preparing the ground.
+tags: event
+view-if: pal_chancellor and emergency_powers >= 7 and not empire_warned and not finale and not game_ending
+priority: 4
+new-page: true
+face-image: img/ev_chancellery.svg
+on-arrival: empire_warned = 1
+
+= A Firmer Hand
+
+The Chancellor now holds powers no Chancellor has held since the Ruusan Reformation. In the Senate's corridors his allies speak openly of a "more secure and stable order", and of how tiresome it is to renew the emergency every year.
+
+*If his powers reach **8** while the Senate's resolve is below **5**, the next crisis could be the excuse he needs to proclaim a new order. That would end the Republic, and the game, before the war is over.*
+
+- @rally: Rally the Senate against him.
+- @sunset: Force a sunset review now.
+- @wait: There is nothing to be done yet.
+
+@rally
+subtitle: −1 political capital; Senate resolve rises.
+choose-if: capital >= 1
+unavailable-subtitle: Needs 1 political capital.
+on-arrival: capital -= 1; senate_resolve += 1.5; pal_relation -= 5
+
+Caucus senators speak against "the creeping crown" in every debate for a month. The galleries listen.
+
+@sunset
+view-if: emergency_sunset
+subtitle: The sunset clause forces a vote: two powers lapse.
+on-arrival: emergency_powers -= 2; senate_resolve += 0.5; pal_relation -= 8
+
+The Caucus invokes the Sunset Amendment. Two of the Chancellor's powers lapse before his allies can renew them.
+
+@wait
+
+The Caucus watches, and waits.

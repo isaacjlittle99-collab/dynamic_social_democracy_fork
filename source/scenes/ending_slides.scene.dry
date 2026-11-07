@@ -18,7 +18,7 @@ Q.summary_html = (typeof SW.summaryHTML === 'function') ? SW.summaryHTML(Q) : ''
 Q.game_ach_html = (typeof SW.achievementsHTML === 'function') ? SW.achievementsHTML(Q, true) : '';
 Q.game_over_reached = 1;
 !}
-go-to: ep_reborn if ending = "reborn"; ep_endures if ending = "endures"; ep_blood if ending = "blood"; ep_divided if ending = "divided"; ep_protectorate if ending = "protectorate"; ep_admirals if ending = "admirals"; ep_hollow if ending = "hollow_crown"; ep_confederacy if ending = "confederacy"; ep_dissolved if ending = "dissolved"; ep_empire if ending = "empire"
+go-to: ep_reborn if ending = "reborn"; ep_endures if ending = "endures"; ep_blood if ending = "blood"; ep_divided if ending = "divided"; ep_protectorate if ending = "protectorate"; ep_admirals if ending = "admirals"; ep_hollow if ending = "hollow_crown"; ep_confederacy if ending = "confederacy"; ep_dissolved if ending = "dissolved"; ep_endless if ending = "endless_war"; ep_empire if ending = "empire"
 
 @ep_reborn
 go-to: legacy
@@ -36,7 +36,7 @@ go-to: legacy
 
 = The Republic Endures
 
-The Sith Lord is gone, but much of what he built remains. [? if emergency_powers >= 3 : The Chancellery keeps many of the powers he took, though it uses them more gently now. ?][? if corruption >= 60 : The Senate is as corrupt as ever, and the guilds as greedy. ?][? if faith < 50 : Faith in the Republic is shaken, perhaps for good. ?]
+[? if shadow_remains : Chancellor Palpatine leaves office at the end of his term, his powers stripped and his name tarnished by everything the Caucus put on the record. He is never charged. He retires to Naboo, and the Jedi never learn what he was. Somewhere, a shadow remains, and it is patient. ?][? if not shadow_remains : The Sith Lord is gone, but much of what he built remains. ?] [? if emergency_powers >= 3 : The Chancellery keeps many of the powers he took, though it uses them more gently now. ?][? if corruption >= 60 : The Senate is as corrupt as ever, and the guilds as greedy. ?][? if faith < 50 : Faith in the Republic is shaken, perhaps for good. ?]
 
 Still, the Republic endures. Its Senate still meets. Its senators still argue. And somewhere in the Caucus offices on Coruscant, a new generation of reformers is already planning the next fight, knowing now how close the last one came.
 
@@ -72,7 +72,7 @@ go-to: legacy
 
 = The Admirals' Republic
 
-Darth Sidious is gone, but the machine he built runs on without him. The emergency powers, the regional governors and the security services pass to the men who served him: Vice Chair Mas Amedda, Governor Tarkin, the admirals of the Grand Army. They speak of order, stability and the dangers of the Jedi.
+[? if admirals_coup : Wilhuff Tarkin's Council of Admirals rules "until victory", and victory never quite comes. The Senate is suspended, then recalled as an advisory chamber. Somewhere in the Chancellery district, a retired senator from Naboo offers the admirals his counsel, and they are wise enough to take it. ?][? if not admirals_coup : Darth Sidious is gone, but the machine he built runs on without him. The emergency powers, the regional governors and the security services pass to the men who served him: Vice Chair Mas Amedda, Governor Tarkin, the admirals of the Grand Army. They speak of order, stability and the dangers of the Jedi. ?]
 
 The Republic survives in name. The Senate still meets, when it is allowed to. It is not the Empire. But it is not the Republic the Caucus fought for, either.
 
@@ -90,7 +90,7 @@ go-to: legacy
 
 = Confederacy Triumphant
 
-The Republic sues for peace. The Treaty of Raxus hands the Rim, the Mid Rim and the trade lanes to the Confederacy of Independent Systems, and leaves a shrunken, humiliated Republic clinging to the Core.
+[? if cis_negotiated : The war never ends on a battlefield. The front collapses one system at a time, until the Senate, exhausted and afraid, votes to negotiate. ?] The Republic sues for peace. The Treaty of Raxus hands the Rim, the Mid Rim and the trade lanes to the Confederacy of Independent Systems, and leaves a shrunken, humiliated Republic clinging to the Core.
 
 The Confederacy is not the free federation Dooku promised. It is ruled by the guilds, the Banking Clan and the Techno Union, and its parliament is a facade. Behind them all, a hooded figure is satisfied. He has a galaxy at war with itself, and both halves in his debt.
 
@@ -102,6 +102,17 @@ go-to: legacy
 [? if recognized_cis : The Treaty of Separation ends the Clone Wars. ?][? if not recognized_cis : The Republic does not go to war. It simply comes apart. ?] The Separatist worlds go their own way, and the Republic that remains is smaller, poorer and humbled. It has lost half the galaxy and a thousand years of pride.
 
 But it is still a republic. Its Senate still meets, and its Chancellor still answers to it. Without his war, the Sith Lord's grand design has no foundation. Perhaps, one day, the worlds that left will want to come home to something better.
+
+@ep_endless
+go-to: legacy
+
+= The Endless War
+
+The Clone Wars do not end. Neither side can win, and neither will yield. Year after year the front moves a few systems one way, then back again. The clones age twice as fast as the men who ordered them, and the factories on Kamino never stop.
+
+[? if sidious_defeated : The Sith Lord is gone, but the war he started has outlived him. The guilds that profit from it on both sides have no reason to let it stop. ?][? if not sidious_defeated : In the Chancellery, the man who started it waits. Every year of war makes the Senate more afraid, and every frightened Senate gives him a little more. He has time. ?]
+
+The Republic survives as a war state: rationing on the Rim, recruiting posters on Coruscant, and a Senate that meets mostly to renew the emergency. Children are born who have never known peace. The Caucus fights on, for budgets and for ceasefires that never hold.
 
 @ep_empire
 go-to: legacy

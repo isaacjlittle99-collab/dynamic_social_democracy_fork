@@ -48,7 +48,42 @@ const REFORM_PREFS = [
   ['discipline', 2], ['concede', 2], ['convention', 1], ['advisors', 2], ['oppose', 2], ['amend', 2], ['networks', 2], ['holonet', 2],
   ['offer', 3], ['let_decide', 3]
 ];
+// "smart": a careful player who reads the state of the game (used to tune difficulty)
+function smartWeight(id, Q) {
+  const has = (k) => id === k || id.endsWith('.' + k);
+  const W = [
+    // never waste a foreseen scheme or a warning
+    [/counter_adv$/, Q.advisor_action_timer <= 0 ? 9 : 0], [/counter$/, Q.capital >= 2 ? 8 : 3],
+    [/tame$/, 8], [/\.rally$/, Q.capital >= 2 ? 7 : 2], [/\.sunset$/, 9], [/\.purge$/, 7], [/reassure$/, 5],
+    // keep the bureaucrats on side
+    [/bureau_reform$/, Q.bureau_relation < 45 ? 9 : 1], [/valorum_bureaucracy$|organa_bureau$|antilles_bureau$/, Q.bureau_relation < 35 ? 9 : 0.5],
+    [/soothe$/, Q.capital >= 2 ? 5 : 1], [/truce$/, Q.bureau_relation < 8 ? 6 : 1], [/valorum_way$/, Q.capital >= 3 ? 4 : 0.5],
+    // the arrest plan
+    [/\.expose$/, 10], [/\.warrant$/, 9], [/emergency_warrant$/, 6], [/fin_arrest_plan\.jedi$/, 0.3],
+    // build the case
+    [/^ca_investigate$/, Q.evidence < 10 ? 6 : 1], [/^sa_judiciary$/, 7], [/^sa_constitution$/, Q.senate_resolve >= 3 ? 7 : 3],
+    [/^sa_security$/, 6], [/^sa_clones$/, 5], [/^ca_contributions$/, Q.capital <= 1 ? 7 : 1], [/^ca_routine$/, Q.capital <= 0 ? 4 : 0.5],
+    [/^ca_rim$/, Q.rim_hardship > 35 ? 5 : 2], [/^ca_jedi$/, 4], [/^ca_confront$/, 3], [/^ca_pact$/, Q.dooku_movement ? 5 : 2],
+    [/^ca_peace$/, Q.war ? 5 : 1], [/^ca_relations$/, 3], [/^ca_media$/, 3], [/^sa_rimaffairs$/, 5], [/^sa_finance$/, 4],
+    [/^sa_diplomacy$/, Q.war ? 6 : 3],
+    // advisors and leadership
+    [/let_decide$/, 4], [/\.offer$/, 3], [/^shuffle_leadership$/, (Q.n_advisors || 0) < 3 ? 6 : 0.3],
+    // the lore events
+    [/labyrinth\.judicials$/, Q.judicial_forces >= 4 ? 6 : 1], [/labyrinth\.council$/, 4], [/hostage_crisis\.measured$/, Q.capital >= 2 ? 5 : 1],
+    [/loyalist_committee\.join$/, 4], [/\.scatter$/, 6]
+  ];
+  for (const [re, w] of W) if (re.test(id)) return w;
+  return null;
+}
 function weightFor(id) {
+  if (POLICY === 'smart' && curEngine) {
+    const sw = smartWeight(id, curEngine.state.qualities);
+    if (sw !== null) return sw;
+    let w = 1;
+    for (const [k, v] of REFORM_PREFS) if (id.indexOf(k) >= 0) w = Math.max(w, v);
+    if (id.indexOf('easy_discard') >= 0 || id.indexOf('go_back') >= 0) w = 0.05;
+    return w;
+  }
   if (POLICY !== 'reform') return 1;
   let w = 1;
   for (const [k, v] of REFORM_PREFS) if (id.indexOf(k) >= 0) w = Math.max(w, v);
@@ -91,6 +126,7 @@ function playOne(gameIndex) {
         if (Q.time && trace.capital[Q.time] === undefined) trace.capital[Q.time] = Q.capital;
         if (Q.chancellor !== lastChancellor) { trace.chancellors.push(Q.bby + ':' + Q.chancellor_bloc + (process.env.TRACE ? '[fell' + (Q.govt_fell||0) + ' rc' + Q.rc_r + ' pal' + Q.pal_r + ' mod' + Q.mod_r + ' faith' + Math.round(Q.faith) + ' corr' + Math.round(Q.corruption) + ']' : '')); lastChancellor = Q.chancellor; }
         if (Q.rim_enfranchised && trace.enfranchisedAt === null) trace.enfranchisedAt = Q.date;
+        if (Q.time !== trace._lt) { trace._lt = Q.time; if (Q.rc_has_access) trace.access = (trace.access || 0) + 1; }
         trace.maxDissent = Math.max(trace.maxDissent, Q.inst_dissent || 0, Q.rimward_dissent || 0, Q.pacifist_dissent || 0, Q.hawk_dissent || 0);
         if (game.scenes[eng.state.sceneId] && game.scenes[eng.state.sceneId].isCard) trace.cardPlays[eng.state.sceneId] = (trace.cardPlays[eng.state.sceneId] || 0) + 1;
         if (Q.time === lastTime) sameTimeSteps++; else { sameTimeSteps = 0; lastTime = Q.time; }
@@ -99,8 +135,8 @@ function playOne(gameIndex) {
           const hand = eng.state.currentHands[eng.state.sceneId] || [];
           const decks = (eng.getCurrentChoices() || []).filter(c => game.scenes[c.id].isDeck && c.canChoose);
           const pinned = (eng.getCurrentChoices() || []).filter(c => game.scenes[c.id].isPinnedCard);
-          const usablePinned = pinned.filter(c => (c.id.indexOf('shuffle') >= 0) ? Math.random() < 0.15 : Q.advisor_action_timer <= 0);
-          if (usablePinned.length && Math.random() < (POLICY === 'passive' ? 0 : 0.35)) { eng.playPinnedCard(pick(usablePinned, c => c.id).id); continue; }
+          const usablePinned = pinned.filter(c => (c.id.indexOf('shuffle') >= 0) ? Math.random() < (POLICY === 'smart' && (Q.n_advisors || 0) < 3 ? 0.6 : 0.15) : Q.advisor_action_timer <= 0);
+          if (usablePinned.length && Math.random() < (POLICY === 'passive' ? 0 : (POLICY === 'smart' ? 0.8 : 0.35))) { eng.playPinnedCard(pick(usablePinned, c => c.id).id); continue; }
           if (hand.length < sc.maxCards && decks.length && (hand.length === 0 || Math.random() < 0.6)) {
             const d = pick(decks, c => c.id);
             const res = eng.drawCard(d.id);
@@ -134,7 +170,7 @@ function playOne(gameIndex) {
   const endings = {}, stucks = {}, nanKeys = {};
   const stats = {pal_chancellor_32: 0, war: 0, finale: 0, turns: 0, empire_powers: 0, kamino_early: 0, chips: 0, rc_chancellor: 0, reforms: 0, beaten: 0, restoration_votes: 0, restored: 0, faith55: 0};
   const seen = {}; const paths = {};
-  const audit = {cap20: [], cap40: [], capEnd: [], rcWon32: 0, rcWon32ThenPal: 0, rcHeldToEnd: 0, enf: 0, enfSeceded: [], enfWar: 0, maxDissent: [], repeatCards: {}, contests: [], changes: [], endLeaders: {}, refused: 0, radicalRim: 0, radicalRimWar: 0, radicalRimSep: [], softRimSep: []};
+  const audit = {cap20: [], cap40: [], capEnd: [], rcWon32: 0, rcWon32ThenPal: 0, rcHeldToEnd: 0, enf: 0, enfSeceded: [], enfWar: 0, maxDissent: [], repeatCards: {}, contests: [], changes: [], endLeaders: {}, refused: 0, radicalRim: 0, radicalRimWar: 0, radicalRimSep: [], softRimSep: [], schemes: [], foiled: 0, purges: 0, purgeGames: 0, gavels: 0, minBureau: [], schemeKinds: {}, early: {}, reformsBy: {}, splits: {}, rcEnd: [], accessTurns: [], maxDiss: [], faithEnd: [], fearEnd: [], corrEnd: [], faithBeaten: []};
   for (let g = 0; g < GAMES; g++) {
     rng = mulberry(SEED * 1000 + g);
     const r = await playOne(g);
@@ -180,6 +216,25 @@ function playOne(gameIndex) {
         const k = grp + ':' + Q[grp + '_leader_id'];
         audit.endLeaders[k] = (audit.endLeaders[k] || 0) + 1;
       }
+      audit.schemes.push(Q.schemes_total || 0); audit.foiled += Q.schemes_foiled || 0;
+      audit.purges += Q.bureau_purges || 0; if (Q.bureau_purges) audit.purgeGames++;
+      audit.gavels += Q.gavels || 0;
+      for (const k of ['hawks_split', 'rimward_split', 'pacifists_resigned', 'inst_crisis']) if (Q[k]) audit.splits[k] = (audit.splits[k] || 0) + 1;
+      audit.rcEnd.push(Q.rc_r || 0); audit.faithEnd.push(Q.faith); audit.fearEnd.push(Q.fear); audit.corrEnd.push(Q.corruption);
+      if (Q.sidious_defeated) audit.faithBeaten.push(Q.faith);
+      if (Q.restoration_passed) {
+        audit.rb = audit.rb || {restored: 0, faith: 0, corruption: 0, trial: 0, safeguards: 0, war: 0};
+        audit.rb.restored++;
+        if (Q.faith < 50) audit.rb.faith++;
+        if (!(Q.corruption < 65 || Q.anti_corruption)) audit.rb.corruption++;
+        if (Q.sidious_method !== 'trial') audit.rb.trial++;
+        if (SW.safeguardCount(Q) < 1) audit.rb.safeguards++;
+        if (Q.war && Q.war_balance < -2) audit.rb.war++;
+      } audit.accessTurns.push(t.access || 0);
+      for (const k of ['early_empire', 'arrests_broke', 'arrests_survived', 'admirals_coup', 'cis_victory', 'shadow_remains']) if (Q[k]) audit.early[k] = (audit.early[k] || 0) + 1;
+      if (Q.ending === 'empire' && !Q.empire_declared) audit.early.empire_by_clock = (audit.early.empire_by_clock || 0) + 1;
+      for (const k of ['emergency_sunset', 'term_limits_protected', 'army_oversight', 'senate_guard_reformed', 'jedi_independence', 'banking_independent', 'rim_enfranchised', 'anti_corruption']) if (Q[k]) audit.reformsBy[k] = (audit.reformsBy[k] || 0) + 1;
+      for (const k in Q) if (k.indexOf('scheme_seen_') === 0) audit.schemeKinds[k.slice(12)] = (audit.schemeKinds[k.slice(12)] || 0) + Q[k];
       const rimSep = Math.round((Q.outer_sep + Q.midrim_sep) / 2);
       if (Q.rim_was_radical) { audit.radicalRim++; if (Q.geonosis_seen) audit.radicalRimWar++; audit.radicalRimSep.push(rimSep); }
       else audit.softRimSep.push(rimSep);
@@ -200,6 +255,12 @@ function playOne(gameIndex) {
   origLog('audit: enfranchised before 22 BBY in ' + audit.enf + ' games; avg seceded ' + avg(audit.enfSeceded) + '%; war in ' + audit.enfWar);
   origLog('audit: leadership contests per game avg ' + avg(audit.contests) + ', leader changes avg ' + avg(audit.changes) + ', coalition offers refused by a leader ' + audit.refused);
   origLog('audit: radical Rim leader at some point in ' + audit.radicalRim + ' games (war in ' + audit.radicalRimWar + ', end Rim sep avg ' + avg(audit.radicalRimSep) + ') vs end Rim sep avg ' + avg(audit.softRimSep) + ' otherwise');
+  origLog('audit: schemes per game avg ' + avg(audit.schemes) + ', foiled total ' + audit.foiled + ', kinds ' + JSON.stringify(audit.schemeKinds));
+  origLog('audit: early or special endings ' + JSON.stringify(audit.early) + '; safeguards passed ' + JSON.stringify(audit.reformsBy));
+  origLog('audit: splits ' + JSON.stringify(audit.splits) + '; Caucus seats at end avg ' + avg(audit.rcEnd) + '; turns with chairs/government avg ' + avg(audit.accessTurns));
+  origLog('audit: at the end: faith avg ' + avg(audit.faithEnd) + ' (when Sidious beaten ' + avg(audit.faithBeaten) + '), fear avg ' + avg(audit.fearEnd) + ', corruption avg ' + avg(audit.corrEnd));
+  if (audit.rb) origLog('audit: restored games failing each best-ending test ' + JSON.stringify(audit.rb));
+  origLog('audit: bureaucrat purges ' + audit.purges + ' (in ' + audit.purgeGames + ' games), Vice Chair gavels ' + audit.gavels);
   origLog('audit: leaders at the end: ' + Object.entries(audit.endLeaders).sort().map(([k, v]) => k + '=' + v).join(' '));
   origLog('audit: avg peak faction dissent ' + avg(audit.maxDissent) + '; cards played 6+ times (games): ' + JSON.stringify(audit.repeatCards));
   origLog('paths:'); Object.keys(paths).sort((a, b) => paths[b] - paths[a]).slice(0, 18).forEach(k => origLog('  ' + paths[k] + 'x ' + k));

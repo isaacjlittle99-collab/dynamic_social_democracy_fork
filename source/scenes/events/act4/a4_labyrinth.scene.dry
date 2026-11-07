@@ -1,0 +1,35 @@
+title: The Labyrinth
+subtitle: The trail of the Sith Lord leads to Coruscant.
+tags: event
+view-if: war and date >= 160 and evidence >= 6 and jedi_suspicion >= 5 and not labyrinth_seen and not sidious_known and not finale and not game_ending
+max-visits: 1
+new-page: true
+face-image: img/ev_jedi.svg
+on-arrival: labyrinth_seen = 1
+
+= The Labyrinth
+
+On Cato Neimoidia, the Jedi have captured Nute Gunray's mechno-chair, with the hologram transmitter he used to speak to his master. Its signal logs point not to the Outer Rim but to Coruscant, to the abandoned factory district called the Works.
+
+The Jedi want to search the Works themselves. Our investigators think they could find out who has been using the building first, if the Judicial Forces will back them. Whoever waits in the Works will not wait long.
+
+- @judicials: Follow the trail with the Judicial Forces.
+- @council: Hand everything to the Jedi Council.
+
+@judicials
+choose-if: judicial_forces >= 3
+unavailable-subtitle: The Judicial Forces are too weak to back a raid.
+subtitle: A chance at proof, or a trap.
+on-arrival: {!
+var ok = Math.random() < 0.4 + (Q.judicial_forces - 3) * 0.1 + (Q.evidence - 6) * 0.05;
+if (ok) { Q.labyrinth_result = 1; Q.evidence += 3; Q.jedi_suspicion += 1; }
+else { Q.labyrinth_result = 0; Q.investigators_lost += 1; Q.evidence -= 1; Q.judicial_forces -= 1; Q.fear += 2; }
+!}
+
+[? if labyrinth_result : The raid finds a hidden chamber, a Sith holocron, and a list of access codes that open doors in the Chancellery district. It is the closest anyone has come to him. ?][? if not labyrinth_result : The Works were a trap. The building collapses on the raiding party. Two investigators die, and the trail goes cold in the rubble. ?]
+
+@council
+subtitle: The Jedi take up the hunt; they will be watching more closely.
+on-arrival: jedi_suspicion += 2; evidence += 1; jedi_relation += 4
+
+The Council sends Masters Windu and Kenobi into the Works. They find nothing but dust and footprints. But the Jedi are now certain that the Sith Lord is on Coruscant, and close to power.

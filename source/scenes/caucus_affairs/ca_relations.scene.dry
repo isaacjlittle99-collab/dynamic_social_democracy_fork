@@ -18,7 +18,7 @@ No bloc in the Senate can govern alone. Which relationship should the Caucus inv
 - @guild: The Commerce Guilds.
 - @pal: The Chancellor's allies.
 - @cis: The Separatist Caucus.
-- @rfc: The Rim Freedom Caucus.
+- @rfc: The breakaway party.
 - @word: A friendly word in the corridors.
 - @easy_discard
 
@@ -68,13 +68,13 @@ on-arrival: capital -= 1; cis_relation += 8; hawk_dissent += 6; pacifist_dissent
 
 @rfc
 view-if: rfc_formed
-subtitle: +8 relations with the Rim Freedom Caucus. Currently [+ rfc_relation : relationships +].
+subtitle: +8 relations with the [+ rfc_name +]. Currently [+ rfc_relation : relationships +].
 choose-if: capital >= 1
 unavailable-subtitle: Not enough political capital.
 on-arrival: capital -= 1; rfc_relation += 8
 
 @word
-subtitle: Free. +3 relations with the Core Moderates and the Independents.
-on-arrival: mod_relation += 3; ind_relation += 3
+subtitle: Free. +1 relations with the Core Moderates and the Independents.
+on-arrival: mod_relation += 1; ind_relation += 1
 
 A few kind words and a shared drink cost nothing, and are worth a little.

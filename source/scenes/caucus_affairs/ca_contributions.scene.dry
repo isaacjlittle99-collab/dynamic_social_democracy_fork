@@ -29,6 +29,7 @@ on-arrival: capital += 1; faith += 0.5; core_rc += 0.5; colonies_rc += 0.5; midr
 Small donations pour in from a hundred worlds. It is not much money, but it is a great deal of goodwill.
 
 @guilds
+view-if: difficulty < 1
 subtitle: +3 political capital. The guilds will expect something; the Caucus will not like it.
 on-arrival: capital += 3; guild_relation += 4; corruption += 1.5; rimward_dissent += 12; pacifist_dissent += 4; inst_dissent += 3; guild_money += 1
 

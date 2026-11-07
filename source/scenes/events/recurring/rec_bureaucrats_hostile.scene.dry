@@ -1,0 +1,36 @@
+title: The Knives Come Out
+subtitle: The bureaucrats are preparing to move against us.
+tags: event
+view-if: bureau_relation <= 10 and (rc_in_govt or rc_chairs > 0) and not bureau_warn_hostile and not finale and not game_ending
+priority: 3
+new-page: true
+face-image: img/ev_chancellery.svg
+on-arrival: bureau_warn_hostile = 1
+
+= The Knives Come Out
+
+A friendly committee secretary warns us over caf: files about the Caucus are being assembled, leaks are being prepared, and the Vice Chair's office has been asking which of our partners could be persuaded to govern without us.
+
+The Senate bureaucracy is now **hostile**. [? if rc_chancellor : If relations fall any further, they will manufacture a crisis around our Chancellor and push the Senate towards a vote of no confidence, as they did to Valorum. ?][? if not rc_chancellor : If relations fall any further, they will "reorganise" the committees and force the Caucus out of government. ?]
+
+- @truce: Offer the guilds a truce.
+- @valorum_way: Make the bureaucrats an offer they understand.
+- @brace: Brace for it.
+
+@truce
+subtitle: The guilds and their clerks relax; the Rimward wing is furious.
+on-arrival: guild_relation += 8; bureau_relation += 8; rimward_dissent += 5; guild_embargo -= 1
+
+The Caucus quietly drops two bills the guilds dislike. Their lobbyists call off the clerks, for now.
+
+@valorum_way
+subtitle: −2 political capital; buys time.
+choose-if: capital >= 2
+unavailable-subtitle: Needs 2 political capital.
+on-arrival: capital -= 2; bureau_relation += 14; corruption += 0.5
+
+Promotions, postings, a new wing for the Senate Archives. It is exactly the kind of deal the Caucus came to the Senate to end.
+
+@brace
+
+The Caucus prepares for the worst and keeps working.

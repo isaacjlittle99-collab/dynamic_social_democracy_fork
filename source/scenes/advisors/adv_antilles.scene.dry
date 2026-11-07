@@ -15,13 +15,14 @@ Alderaan’s senior senator is patient, precise and deeply attached to the proce
 - @antilles_concord: Broker a concord with the Core Moderates.
 - @antilles_discipline: Call the Caucus to order.
 - @antilles_procedure: Use the Senate rules against our opponents.
+- @antilles_bureau: Old procedural friendships.
 - @go_back: Back.
 
 @antilles_concord
 subtitle: +8 relations with the Core Moderates, +3 with the Independents.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: mod_relation += 8; ind_relation += 3; advisor_action_timer = 4
+on-arrival: mod_relation += 8; ind_relation += 3; advisor_action_timer = 5
 
 Over a long lunch in the Senate dining hall, Antilles reminds the Core Moderates how much they have in common with the Caucus.
 
@@ -29,7 +30,7 @@ Over a long lunch in the Senate dining hall, Antilles reminds the Core Moderates
 subtitle: Reduces dissent in every faction.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: inst_dissent -= 8; rimward_dissent -= 5; pacifist_dissent -= 5; hawk_dissent -= 5; advisor_action_timer = 4
+on-arrival: inst_dissent -= 8; rimward_dissent -= 5; pacifist_dissent -= 5; hawk_dissent -= 5; advisor_action_timer = 5
 
 Antilles reminds the Caucus, politely and at length, that a divided opposition is no opposition at all.
 
@@ -37,6 +38,14 @@ Antilles reminds the Caucus, politely and at length, that a divided opposition i
 subtitle: +1 political capital; calms the coalition if we are in government.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: capital += 1; coalition_dissent -= 1 if rc_in_govt; advisor_action_timer = 4
+on-arrival: capital += 1; coalition_dissent -= 1 if rc_in_govt; advisor_action_timer = 5
 
 Antilles knows the Senate rulebook better than its authors did. A well-timed point of order buys the Caucus a favour or two.
+
+@antilles_bureau
+subtitle: Warms the Senate bureaucracy towards us a little.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: Our advisors have already acted recently.
+on-arrival: bureau_relation += 6; advisor_action_timer = 5
+
+Antilles has sat on more procedural committees than anyone alive. The clerks who serve them still take his calls.

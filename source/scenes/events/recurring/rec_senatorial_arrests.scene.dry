@@ -1,0 +1,25 @@
+title: The Senatorial Arrests
+subtitle: The Chancellor moves against the Delegation.
+tags: event
+view-if: arrests_warned and not arrests_tamed and not arrests_done and pal_chancellor and senate_resolve < 5 and navy_loyalty < 60 and not finale and not game_ending
+priority: 15
+new-page: true
+face-image: img/ev_shadow.svg
+on-arrival: {!
+Q.arrests_done = 1;
+if (Q.arrests_hedged) {
+  Q.adv_antilles = 0; Q.adv_organa = 0; Q.adv_mothma = 0; Q.adv_amidala = 0; Q.adv_chuchi = 0; Q.adv_bel_iblis = 0; Q.adv_farr = 0; Q.adv_valorum = 0;
+  SW.countAdvisors(Q);
+  for (var i = 0; i < SW.REGIONS.length; i++) Q[SW.REGIONS[i] + '_rc'] *= 0.5;
+  Q.capital = Math.min(Q.capital, 0); Q.senate_resolve += 1; Q.faith -= 4;
+  Q.arrests_survived = 1;
+} else {
+  Q.empire_declared = 1; Q.game_ending = 1; Q.seeds = 1; Q.arrests_broke = 1;
+}
+!}
+
+= The Senatorial Arrests
+
+Before dawn, the Senate Guard, in its new red armour, comes for the signatories of the Delegation's statement. Senators are taken from their apartments in their nightclothes. The HoloNet calls them "conspirators against the Republic".
+
+[? if arrests_survived : Because our leaders had scattered, most of them escape. But the Caucus on Coruscant is broken: our advisors are in hiding, half our senators have resigned or fled, and our funds are frozen. We will have to rebuild from almost nothing. ?][? if arrests_broke : With its leaders in cells and its funds seized, the Caucus is finished as a force in the Senate. Without it, nothing stands between the Chancellor and the throne. The Republic falls, quietly, within the month. ?]

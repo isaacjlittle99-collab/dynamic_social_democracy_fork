@@ -4,7 +4,7 @@ is-card: true
 tags: caucus_affairs
 card-image: img/card_shadow.svg
 view-if: investigate_timer <= 0 and date >= 12 and cardok_investigate
-on-arrival: turn_actions += 1; investigate_timer = 2; last_card_timer = "investigate"
+on-arrival: turn_actions += 1; investigate_timer = 2; last_card_timer = "investigate"; investigated_at = time
 new-page: true
 
 = Shadow Investigation

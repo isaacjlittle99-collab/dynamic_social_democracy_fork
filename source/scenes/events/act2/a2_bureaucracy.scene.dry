@@ -18,13 +18,13 @@ face-image: img/ev_chancellery.svg
 subtitle: −1 political capital. Slows the Chancellery's growth; it will be remembered.
 choose-if: capital >= 1
 unavailable-subtitle: Not enough political capital.
-on-arrival: capital -= 1; grand_plan -= 2; pal_relation -= 6; senate_resolve += 0.3
+on-arrival: capital -= 1; grand_plan -= 2; pal_relation -= 6; senate_resolve += 0.3; bureau_captured = -1
 
 The Caucus forces several transfers to be reversed. The Chancellor's office thanks the Caucus for its "vigilance".
 
 @accept
 subtitle: Less gridlock, more power in one office.
-on-arrival: corruption -= 2; grand_plan += 3; faith += 1; pal_relation += 3
+on-arrival: corruption -= 2; grand_plan += 3; faith += 1; pal_relation += 3; bureau_captured = 1
 
 The Senate becomes noticeably more efficient. Decisions that took years now take weeks, because they are no longer really being made by the Senate.
 

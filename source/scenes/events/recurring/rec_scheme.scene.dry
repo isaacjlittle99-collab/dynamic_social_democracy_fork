@@ -1,0 +1,14 @@
+title: A Hidden Hand
+subtitle: Someone moves against the Caucus.
+tags: event
+view-if: scheme_pending != "" and time >= scheme_due and not finale and not game_ending
+priority: 2
+new-page: true
+face-image: img/ev_shadow.svg
+on-arrival: {! SW.resolveScheme(Q); !}
+
+= [? if scheme_was_foiled : A Plot Foiled ?][? if not scheme_was_foiled : A Hidden Hand ?]
+
+[+ scheme_text +]
+
+[? if scheme_was_foiled : Whoever arranged it covered their tracks, but not perfectly. Our evidence grows a little. ?][? if not scheme_was_foiled : Nothing ties it to anyone. It never does. *(The Shadow tab keeps a list of recent misfortunes. The more we threaten whoever is behind them, the more often they come. Jedi suspicion, strong evidence or a recent Shadow Investigation would have warned us in time.)* ?]

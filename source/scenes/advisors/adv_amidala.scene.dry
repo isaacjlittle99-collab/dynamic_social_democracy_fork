@@ -21,7 +21,7 @@ The former Queen of Naboo is young, fearless and already one of the most respect
 subtitle: +1 faith and more support in the Mid Rim.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: faith += 1; midrim_rc += 2; advisor_action_timer = 4
+on-arrival: faith += 1; midrim_rc += 2; advisor_action_timer = 5
 
 Senator Amidala’s appeal for honest government carries a special weight. Everyone remembers the Queen who stood up to the Trade Federation.
 
@@ -30,7 +30,7 @@ view-if: anakin_found and date >= 132
 subtitle: His trust in the Chancellor wavers a little.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: anakin_fall -= 1; advisor_action_timer = 4
+on-arrival: anakin_fall -= 1; advisor_action_timer = 5
 
 Padmé and Anakin talk for hours, about Tatooine, the war and the Chancellor’s kindness to him. She does not tell him what she fears. She asks him what he fears.
 
@@ -38,6 +38,6 @@ Padmé and Anakin talk for hours, about Tatooine, the war and the Chancellor’s
 subtitle: +5 relations with the Core Moderates and Independents.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: mod_relation += 5; ind_relation += 5; advisor_action_timer = 4
+on-arrival: mod_relation += 5; ind_relation += 5; advisor_action_timer = 5
 
 Padmé spends a week of late nights with moderate senators who have stopped listening to anyone. They listen to her.

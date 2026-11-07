@@ -21,7 +21,7 @@ Young, eloquent and principled, Chandrila’s senator believes the Republic’s 
 subtitle: +2 faith in the Republic and more support in the Core and Colonies.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: faith += 2; core_rc += 1; colonies_rc += 1; advisor_action_timer = 4
+on-arrival: faith += 2; core_rc += 1; colonies_rc += 1; advisor_action_timer = 5
 
 Mon Mothma’s speech on the meaning of the Ruusan settlement is replayed across the HoloNet for days.
 
@@ -29,7 +29,7 @@ Mon Mothma’s speech on the meaning of the Ruusan settlement is replayed across
 subtitle: Calms the Pacifists; cools separatism in the Mid Rim.
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: pacifist_dissent -= 8; midrim_sep -= 2; advisor_action_timer = 4
+on-arrival: pacifist_dissent -= 8; midrim_sep -= 2; advisor_action_timer = 5
 
 Mothma reminds the Caucus why it exists: to keep the peace by keeping faith with every member world.
 
@@ -37,6 +37,6 @@ Mothma reminds the Caucus why it exists: to keep the peace by keeping faith with
 subtitle: +0.5 Senate resolve (only credible once there are emergency powers or some evidence).
 choose-if: advisor_action_timer <= 0
 unavailable-subtitle: Our advisors have already acted recently.
-on-arrival: senate_resolve += 0.5 if emergency_powers > 0 or evidence >= 2; faith += 0.5; advisor_action_timer = 4
+on-arrival: senate_resolve += 0.5 if emergency_powers > 0 or evidence >= 2; faith += 0.5; advisor_action_timer = 5
 
 “Every surrender of our authority,” Mothma tells the Senate, “is made in the name of a crisis. And every crisis ends, except the surrender.”

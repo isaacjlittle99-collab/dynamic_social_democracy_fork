@@ -20,6 +20,7 @@ Citing Separatist spies and propaganda, the Chancellery asks for authority over 
 @oppose
 on-arrival: {!
 var st = {pal: 1, sec: 0.85, mod: 0.4 + Q.fear / 250, guild: 0.5, ind: 0.4, rim: 0.3, rfc: 0.2};
+if (Q.security_fast) { st.mod += 0.1; st.ind += 0.1; }
 var adj = (Q.free_press || 0) * 0.04;
 for (var b in st) if (b !== 'pal') st[b] -= adj;
 Q.sa_vote = SW.vote(Q, st, 0, 'powers');
@@ -52,6 +53,7 @@ else { Q.emergency_powers += 1; Q.security_act = 1; Q.holonet_free = Q.free_pres
 @support
 on-arrival: {!
 var st = {pal: 1, sec: 0.85, mod: 0.4 + Q.fear / 250, guild: 0.5, ind: 0.4, rim: 0.3, rfc: 0.2};
+if (Q.security_fast) { st.mod += 0.1; st.ind += 0.1; }
 Q.sa_vote = SW.vote(Q, st, 1, 'powers');
 Q.vote_html = SW.voteBanner('Enhanced Security Act', Q.sa_vote);
 if (Q.sa_vote >= 50) { Q.emergency_powers += 1; Q.security_act = 1; Q.holonet_free = 0; }
